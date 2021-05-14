@@ -43,6 +43,7 @@ $pwd = [system.web.security.membership]::GeneratePassword(30,15)
 
 echo ("$pwd") > c:/temp/sys.txt
 Start-Sleep -s 1
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 Start-Sleep -s 10
