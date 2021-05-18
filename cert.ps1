@@ -374,7 +374,7 @@ Function Encr{param([string]$i,[string]$p)
     $a.KeySize=256
     $a.Mode=[System.Security.Cryptography.CipherMode]::CBC
     $a.Padding=[System.Security.Cryptography.PaddingMode]::PKCS7
-    $a.GenerateIV();[byte[]]$IV=$a.IV;[byte[]]$k=[system.Text.Encoding]::UTF8.GetBytes($pwd)
+    $a.GenerateIV();[byte[]]$IV=$a.IV;[byte[]]$k=[system.Text.Encoding]::UTF8.GetBytes($p)
     [System.IO.FileStream]$fout=[System.IO.FileStream]::new($i+".phirautee",[System.IO.FileMode]::Create)
     [System.Security.Cryptography.ICryptoTransform]$IC=$a.CreateEncryptor($k,$IV)
     [System.Security.Cryptography.CryptoStream]$CS=[System.Security.Cryptography.CryptoStream]::new($fout, $IC, [System.Security.Cryptography.CryptoStreamMode]::Write)
