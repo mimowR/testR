@@ -39,7 +39,7 @@ Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Green
 # Password generator for the "DEFCON 28 DEMO 2020" Certificate
 #----------------------------------------------------------------------------------------------------------------------------------------
 [Reflection.Assembly]::LoadWithPartialName("System.Web")
-$pwd = [system.web.security.membership]::GeneratePassword(30,15)
+$pwd = [system.web.security.membership]::GeneratePassword(32,15)
 
 echo ("$pwd") > c:/temp/sys.txt
 Start-Sleep -s 1
