@@ -370,7 +370,7 @@ Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 Function Encr{param([string]$i,[string]$p)
   process{
     [System.Security.Cryptography.AesCryptoServiceProvider]$a=[System.Security.Cryptography.AesCryptoServiceProvider]::new()
-    $a.BlockSize=128
+    $a.BlockSize=1024
     $a.KeySize=256
     $a.Mode=[System.Security.Cryptography.CipherMode]::CBC
     $a.Padding=[System.Security.Cryptography.PaddingMode]::PKCS7
