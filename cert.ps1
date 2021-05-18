@@ -386,8 +386,10 @@ Function Encr{param([string]$i,[string]$p)
     $DA=$true;[int]$D
     While ($DA){
       $D=$fin.ReadByte()
+      Write-Host "Byte D: $D" -ForegroundColor Green
       if($D -ne -1){
         $CS.WriteByte([byte]$D)
+	Write-Host "Contenido de CS: $CS" -ForegroundColor Green
       }
       else{
         $DA = $false
