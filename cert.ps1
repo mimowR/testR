@@ -375,21 +375,16 @@ Function Encr{param([string]$i,[string]$p)
     $a.Mode=[System.Security.Cryptography.CipherMode]::CBC
     $a.Padding=[System.Security.Cryptography.PaddingMode]::PKCS7
     $a.GenerateIV();[byte[]]$IV=$a.IV;[byte[]]$k=[system.Text.Encoding]::UTF8.GetBytes($p)
-    Write-Host "Valor de P: $p" -ForegroundColor Green
     [System.IO.FileStream]$fout=[System.IO.FileStream]::new($i+".phirautee",[System.IO.FileMode]::Create)
-    Write-Host "Valor de K: $k" -ForegroundColor Green
     [System.Security.Cryptography.ICryptoTransform]$IC=$a.CreateEncryptor($k,$IV)
-    Write-Host "Valor de IV: $IV" -ForegroundColor Green
     [System.Security.Cryptography.CryptoStream]$CS=[System.Security.Cryptography.CryptoStream]::new($fout, $IC, [System.Security.Cryptography.CryptoStreamMode]::Write)
     [System.IO.FileStream]$fin=[System.IO.FileStream]::new($i,[System.IO.FileMode]::Open)
     $fout.Write($IV,0,$IV.Count)
     $DA=$true;[int]$D
     While ($DA){
       $D=$fin.ReadByte()
-      Write-Host "Byte D: $D" -ForegroundColor Green
       if($D -ne -1){
         $CS.WriteByte([byte]$D)
-	Write-Host "Contenido de CS: $CS" -ForegroundColor Green
       }
       else{
         $DA = $false
