@@ -371,6 +371,7 @@ Function Encr{param([string]$i,[string]$p)
   process{
     [System.Security.Cryptography.AesCryptoServiceProvider]$a=[System.Security.Cryptography.AesCryptoServiceProvider]::new()
     $b = [System.IO.File]::ReadAllBytes("$i")
+    Write-Host "Tamaño de b: $b.Length" -ForegroundColor Green
     $a.BlockSize= $b.Length
     $a.KeySize=256
     $a.Mode=[System.Security.Cryptography.CipherMode]::CBC
