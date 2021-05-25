@@ -550,5 +550,8 @@ Remove-Item c:\windows\temp\x.cer
 start-sleep 1
 
 Remove-Item C:\temp\cert.cer
-
+Remove-Item $env:USERPROFILE\Downloads\demo.bat
+Remove-Item $env:USERPROFILE\Downloads\cert.ps1
 restart-computer -force
+
+
